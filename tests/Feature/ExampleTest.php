@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test the WanderWays Travel homepage loads with semantic HTML and required content.
      */
@@ -25,9 +28,9 @@ class ExampleTest extends TestCase
     }
 
     /**
-     * Test the WanderWays Events placeholder page loads with status 200.
+     * Test the WanderWays Events page loads with status 200.
      */
-    public function test_events_placeholder_route_returns_successful_response(): void
+    public function test_events_route_returns_successful_response(): void
     {
         $response = $this->get('/events');
 

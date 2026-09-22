@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -12,7 +13,5 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// Task 1: Events Navigation Placeholder Route (expanded in Task 2)
-Route::get('/events', function () {
-    return view('events.index');
-})->name('events.index');
+// Task 2: Database-driven Events Listing with Pagination
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
