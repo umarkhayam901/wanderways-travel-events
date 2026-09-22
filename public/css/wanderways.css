@@ -1035,6 +1035,232 @@ button:focus-visible,
 }
 
 /* ==========================================================================
+   11.5 Event Registration Form Styles
+   ========================================================================== */
+.registration-page-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.registration-wrapper {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.registration-back-nav {
+  margin-bottom: var(--space-md);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--color-accent);
+}
+
+/* Alerts */
+.alert {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.alert--success {
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.alert--danger {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.alert__icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.alert__content {
+  flex: 1 1 auto;
+}
+
+.alert__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.alert__message {
+  margin: 0;
+}
+
+.alert__list {
+  margin: 0.25rem 0 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+/* Registration Card */
+.registration-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.registration-card__header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.registration-card__title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: var(--space-xs) 0;
+  letter-spacing: -0.02em;
+}
+
+.registration-card__subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Selected Event Card */
+.selected-event-card {
+  background-color: var(--color-teal-light);
+  border: 1px solid rgba(32, 163, 158, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.selected-event-card__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-teal);
+  margin-bottom: 0.25rem;
+}
+
+.selected-event-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.35rem 0;
+}
+
+.selected-event-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Form Controls */
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.form-required {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.form-optional {
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  background-color: var(--color-surface);
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 3px rgba(32, 163, 158, 0.2);
+}
+
+.form-control--invalid {
+  border-color: #dc2626 !important;
+  background-color: #fffaf0;
+}
+
+.form-control--invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important;
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin: 0.25rem 0 0 0;
+}
+
+.form-help {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ==========================================================================
    12. Responsive Breakpoints
    ========================================================================== */
 
@@ -1075,6 +1301,18 @@ button:focus-visible,
   .cta-banner__actions {
     flex-direction: row;
     justify-content: center;
+  }
+
+  .registration-card {
+    padding: var(--space-2xl);
+  }
+
+  .form-actions {
+    flex-direction: row;
+  }
+
+  .form-actions .btn {
+    flex: 1;
   }
 
   .footer-grid {
