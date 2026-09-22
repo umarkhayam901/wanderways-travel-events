@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="{{ asset('css/wanderways.css') }}">
 </head>
 <body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Semantic Header -->
     <header class="site-header">
         <div class="site-container">
@@ -23,12 +26,12 @@
                 <nav class="site-nav" aria-label="Primary Navigation">
                     <ul class="site-nav__list">
                         <li>
-                            <a href="{{ route('home') }}" class="site-nav__link {{ request()->routeIs('home') ? 'site-nav__link--active' : '' }}">
+                            <a href="{{ route('home') }}" class="site-nav__link {{ request()->routeIs('home') ? 'site-nav__link--active' : '' }}" {!! request()->routeIs('home') ? 'aria-current="page"' : '' !!}>
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('events.index') }}" class="site-nav__link {{ request()->routeIs('events.*') ? 'site-nav__link--active' : '' }}">
+                            <a href="{{ route('events.index') }}" class="site-nav__link {{ request()->routeIs('events.*') ? 'site-nav__link--active' : '' }}" {!! request()->routeIs('events.*') ? 'aria-current="page"' : '' !!}>
                                 Events
                             </a>
                         </li>
@@ -54,7 +57,7 @@
     </header>
 
     <!-- Semantic Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         @yield('content')
     </main>
 
