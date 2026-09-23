@@ -60,5 +60,9 @@ if ($dbConnection === 'sqlite') {
     }
 }
 
-// 4. Forward execution to Laravel's public entrypoint
+// 4. Normalize server variables so Laravel generates clean routes and asset URLs
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
+
+// 5. Forward execution to Laravel's public entrypoint
 require __DIR__ . '/../public/index.php';

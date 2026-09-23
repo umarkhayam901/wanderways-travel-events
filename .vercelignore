@@ -1,0 +1,4 @@
+.git
+.github
+.phpunit.result.cache
+tests
