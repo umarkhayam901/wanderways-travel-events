@@ -48,12 +48,12 @@ class EventTest extends TestCase
     }
 
     /**
-     * Test pagination works when multiple events exist.
+     * Test pagination works when multiple events exist (2 events per page).
      */
     public function test_events_page_pagination_works(): void
     {
-        // Create 8 events (6 per page)
-        for ($i = 1; $i <= 8; $i++) {
+        // Create 5 events (2 per page)
+        for ($i = 1; $i <= 5; $i++) {
             Event::create([
                 'title' => sprintf('Expedition Number %02d', $i),
                 'description' => 'A curated travel expedition for testing pagination controls.',
@@ -63,20 +63,21 @@ class EventTest extends TestCase
             ]);
         }
 
-        // Page 1 should display first 6 events and link to page 2
+        // Page 1 should display first 2 events and link to page 2
         $responsePage1 = $this->get('/events');
         $responsePage1->assertStatus(200);
         $responsePage1->assertSee('Expedition Number 01');
-        $responsePage1->assertSee('Expedition Number 06');
-        $responsePage1->assertDontSee('Expedition Number 07');
+        $responsePage1->assertSee('Expedition Number 02');
+        $responsePage1->assertDontSee('Expedition Number 03');
         $responsePage1->assertSee('page=2');
 
-        // Page 2 should display remaining 2 events
+        // Page 2 should display next 2 events
         $responsePage2 = $this->get('/events?page=2');
         $responsePage2->assertStatus(200);
-        $responsePage2->assertSee('Expedition Number 07');
-        $responsePage2->assertSee('Expedition Number 08');
+        $responsePage2->assertSee('Expedition Number 03');
+        $responsePage2->assertSee('Expedition Number 04');
         $responsePage2->assertDontSee('Expedition Number 01');
+        $responsePage2->assertDontSee('Expedition Number 05');
     }
 
     /**

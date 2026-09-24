@@ -25,7 +25,7 @@ A modern, responsive Laravel mini-platform designed to showcase upcoming travel-
 - **Event Eloquent Model**: `app/Models/Event.php` with mass assignment protection (`$fillable`) and date casting.
 - **Database Schema**: `events` table with `id`, `title`, `description`, `location`, `event_date`, `event_time`, and timestamps.
 - **Realistic Event Seeding**: 14 curated travel expeditions spanning historical walks, alpine trekking, and desert safaris.
-- **EventController**: `app/Http/Controllers/EventController.php` with chronological ordering and Laravel pagination (6 events per page).
+- **EventController**: `app/Http/Controllers/EventController.php` with chronological ordering and Laravel pagination (2 events per page).
 - **Responsive Events Page**: `resources/views/events/index.blade.php` displaying date badge, event title, location, time, description, and "Register for Event" CTA.
 - **Accessible Pagination**: Semantic pagination controls supporting page navigation and query strings.
 - **Empty State**: Friendly fallback card when no events are scheduled.
