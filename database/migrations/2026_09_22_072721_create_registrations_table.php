@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained('events')->cascadeOnDelete();
             $table->string('name', 100);
             $table->string('email', 150);
-            $table->string('phone', 25)->nullable();
             $table->timestamps();
 
             // Prevent duplicate registration for the same event by email

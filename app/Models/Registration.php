@@ -19,7 +19,6 @@ class Registration extends Model
         'event_id',
         'name',
         'email',
-        'phone',
     ];
 
     /**
