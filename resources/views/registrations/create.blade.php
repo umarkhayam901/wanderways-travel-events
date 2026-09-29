@@ -136,24 +136,6 @@
                             <span class="form-help">Each email can only register once per travel event.</span>
                         </div>
 
-                        <!-- Phone Number Field (Optional) -->
-                        <div class="form-group @error('phone') form-group--error @enderror">
-                            <label for="phone" class="form-label">
-                                Phone Number <span class="form-optional">(Optional)</span>
-                            </label>
-                            <input type="tel"
-                                   id="phone"
-                                   name="phone"
-                                   class="form-input @error('phone') form-control--invalid @enderror"
-                                   value="{{ old('phone') }}"
-                                   placeholder="e.g. +92 300 1234567"
-                                   maxlength="25"
-                                   aria-describedby="@error('phone') phone-error @enderror">
-                            @error('phone')
-                                <p id="phone-error" class="form-error" role="alert">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         <!-- Form Submit Actions -->
                         <div class="form-actions">
                             <button type="submit" class="btn btn--primary btn--lg btn--block">

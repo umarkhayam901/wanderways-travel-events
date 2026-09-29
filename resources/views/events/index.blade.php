@@ -61,10 +61,10 @@
                         </div>
 
                         <div class="event-card__footer">
-                            <a href="{{ Route::has('registrations.create') ? route('registrations.create', ['event_id' => $event->id]) : url('/register?event_id=' . $event->id) }}"
+                            <a href="{{ route('registrations.create', ['event_id' => $event->id]) }}"
                                class="btn btn--primary btn--sm event-card__cta"
                                aria-label="Register for {{ $event->title }}">
-                                <span>Register for Event</span>
+                                <span>Register</span>
                                 <span aria-hidden="true">&rarr;</span>
                             </a>
                         </div>

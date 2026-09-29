@@ -38,7 +38,6 @@ class RegistrationController extends Controller
             'event_id' => ['required', 'integer', 'exists:events,id'],
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:150'],
-            'phone' => ['nullable', 'string', 'max:25'],
         ], [
             'event_id.required' => 'Please select a travel event to register for.',
             'event_id.exists' => 'The selected travel event does not exist.',
@@ -47,7 +46,6 @@ class RegistrationController extends Controller
             'email.required' => 'A valid email address is required.',
             'email.email' => 'Please provide a valid email format (e.g. traveler@example.com).',
             'email.max' => 'Your email may not exceed 150 characters.',
-            'phone.max' => 'Your phone number may not exceed 25 characters.',
         ]);
 
         // 2. Duplicate registration check (same email for the same event)
@@ -64,13 +62,21 @@ class RegistrationController extends Controller
         }
 
         // 3. Database storage
-        Registration::create($validated);
+        $registration = Registration::create($validated);
 
-        $event = Event::findOrFail($validated['event_id']);
-
-        // 4. Redirect with confirmation success message
+        // 4. Redirect to registration confirmation/success page
         return redirect()
-            ->route('registrations.create', ['event_id' => $event->id])
-            ->with('success', 'Registration confirmed! You have successfully registered for "' . $event->title . '". We look forward to your journey with WanderWays!');
+            ->route('registrations.confirmation', $registration)
+            ->with('success', 'Registration confirmed! You have successfully registered for "' . $registration->event->title . '". We look forward to your journey with WanderWays!');
+    }
+
+    /**
+     * Display the registration confirmation/success page.
+     */
+    public function confirmation(Registration $registration): View
+    {
+        $registration->load('event');
+
+        return view('registrations.confirmation', compact('registration'));
     }
 }

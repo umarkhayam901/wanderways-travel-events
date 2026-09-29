@@ -17,6 +17,7 @@ Route::get('/', function () {
 // Task 2: Database-driven Events Listing with Pagination
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
-// Task 3: Event Registration Form, Validation & Storage
+// Task 3: Event Registration Form, Validation, Storage & Confirmation
 Route::get('/register', [RegistrationController::class, 'create'])->name('registrations.create');
 Route::post('/register', [RegistrationController::class, 'store'])->name('registrations.store');
+Route::get('/registrations/{registration}/confirmation', [RegistrationController::class, 'confirmation'])->name('registrations.confirmation');

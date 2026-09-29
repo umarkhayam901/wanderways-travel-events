@@ -1261,6 +1261,145 @@ button:focus-visible,
 }
 
 /* ==========================================================================
+   11.5 Confirmation Page
+   ========================================================================== */
+.confirmation-card {
+  text-align: left;
+}
+
+.confirmation-card__icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+  text-align: center;
+}
+
+.confirmation-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.confirmation-section {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-lg);
+}
+
+.confirmation-section__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-md) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.confirmation-event-card__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.confirmation-event-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.confirmation-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  font-size: 0.9rem;
+}
+
+.confirmation-meta-label {
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-right: 0.25rem;
+}
+
+.confirmation-meta-value {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+.confirmation-event-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.confirmation-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.confirmation-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.confirmation-list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.confirmation-list-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.confirmation-list-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.confirmation-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  background-color: var(--color-teal-light);
+  border: 1px solid rgba(32, 163, 158, 0.25);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.confirmation-notice__icon {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.confirmation-notice__text {
+  font-size: 0.875rem;
+  color: var(--color-text-main);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.confirmation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* ==========================================================================
    12. Responsive Breakpoints
    ========================================================================== */
 
@@ -1313,6 +1452,21 @@ button:focus-visible,
 
   .form-actions .btn {
     flex: 1;
+  }
+
+  .confirmation-details-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .confirmation-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .confirmation-list-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .footer-grid {
