@@ -45,6 +45,8 @@ class EventTest extends TestCase
         $response->assertSee('20');
         $response->assertSee('2026');
         $response->assertSee('08:00 AM');
+        $response->assertSee('Register');
+        $response->assertSee('/register?event_id=' . $event->id);
     }
 
     /**

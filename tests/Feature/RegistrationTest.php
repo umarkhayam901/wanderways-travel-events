@@ -62,19 +62,20 @@ class RegistrationTest extends TestCase
             'event_id' => $this->testEvent->id,
             'name' => 'Umar Khayam',
             'email' => 'umar@example.com',
-            'phone' => '+92 300 1234567',
         ];
 
         $response = $this->post('/register', $payload);
 
-        $response->assertRedirect('/register?event_id=' . $this->testEvent->id);
+        $registration = Registration::first();
+        $this->assertNotNull($registration);
+
+        $response->assertRedirect(route('registrations.confirmation', $registration));
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('registrations', [
             'event_id' => $this->testEvent->id,
             'name' => 'Umar Khayam',
             'email' => 'umar@example.com',
-            'phone' => '+92 300 1234567',
         ]);
 
         // Check relationship
@@ -138,7 +139,6 @@ class RegistrationTest extends TestCase
             'event_id' => $this->testEvent->id,
             'name' => 'First Registrant',
             'email' => 'duplicate@example.com',
-            'phone' => '+92 300 1111111',
         ]);
 
         // Second registration attempt for the SAME event with SAME email
@@ -179,5 +179,26 @@ class RegistrationTest extends TestCase
 
         $response->assertSessionHas('success');
         $this->assertDatabaseCount('registrations', 2);
+    }
+
+    /**
+     * Test registration confirmation page loads and displays event and attendee information.
+     */
+    public function test_registration_confirmation_page_displays_details(): void
+    {
+        $registration = Registration::create([
+            'event_id' => $this->testEvent->id,
+            'name' => 'Umar Khayam',
+            'email' => 'umar@example.com',
+        ]);
+
+        $response = $this->get(route('registrations.confirmation', $registration));
+
+        $response->assertStatus(200);
+        $response->assertSee('Registration Confirmed');
+        $response->assertSee('Umar Khayam');
+        $response->assertSee('umar@example.com');
+        $response->assertSee($this->testEvent->title);
+        $response->assertSee($this->testEvent->location);
     }
 }
