@@ -1,0 +1,67 @@
+services:
+  # ---------------------------------------------------------------------------
+  # WanderWays Travel - Laravel Web Service
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: wanderways-travel-events
+    runtime: php
+    plan: free
+    region: oregon
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+    startCommand: |
+      php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+    envVars:
+      - key: APP_NAME
+        value: "WanderWays Travel"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        fromService:
+          type: web
+          name: wanderways-travel-events
+          property: host
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: wanderways-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: wanderways-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: wanderways-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: wanderways-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: wanderways-db
+          property: password
+      - key: DB_SSLMODE
+        value: require
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_STORE
+        value: array
+
+# ---------------------------------------------------------------------------
+# Managed PostgreSQL Database Add-on
+# ---------------------------------------------------------------------------
+databases:
+  - name: wanderways-db
+    plan: free
+    region: oregon
+    databaseName: wanderways_prod
+    user: wanderways_user
