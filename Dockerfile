@@ -1,0 +1,59 @@
+# ==============================================================================
+# WanderWays Travel Event Management Mini-Platform
+# Production Dockerfile for Render Deployment
+# ==============================================================================
+
+FROM php:8.4-cli-alpine
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install system dependencies & build tools
+RUN apk add --no-cache \
+    curl \
+    git \
+    unzip \
+    libzip-dev \
+    oniguruma-dev \
+    libpng-dev \
+    libxml2-dev \
+    postgresql-dev \
+    bash
+
+# Install required PHP extensions for Laravel, MySQL, and PostgreSQL
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    zip \
+    bcmath \
+    mbstring \
+    opcache
+
+# Install official Composer binary from composer image
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Copy application files into the container
+COPY . /var/www/html
+
+# Install Composer production dependencies
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+# Set permissions for Laravel writable directories
+RUN mkdir -p /var/www/html/storage/framework/cache/data \
+             /var/www/html/storage/framework/sessions \
+             /var/www/html/storage/framework/views \
+             /var/www/html/storage/logs \
+             /var/www/html/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod +x /var/www/html/docker-entrypoint.sh
+
+# Default port environment variable for Render (Render dynamically injects $PORT)
+ENV PORT=8000
+
+# Expose container port
+EXPOSE ${PORT}
+
+# Run entrypoint script
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
